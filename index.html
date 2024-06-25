@@ -1,0 +1,346 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yapay Zeka Oyunlaştırma Platformu</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css"/>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#"><i class="fas fa-gamepad"></i> <span id="navbar-title">Yapay Zeka Oyunlaştırma Platformu</span></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="changeLanguage('tr')"><i class="fas fa-flag"></i> TR</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="changeLanguage('en')"><i class="fas fa-flag-usa"></i> EN</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div id="avatar-selection" class="container text-center mt-3">
+        <h2 id="avatar-select-title">Avatarını Seç</h2>
+        <div class="d-flex justify-content-center align-items-center">
+            <button class="btn btn-primary mr-3" onclick="previousAvatar()">&#9664;</button>
+            <div id="avatar-container" class="d-flex justify-content-center align-items-center">
+                <!-- Avatars will be dynamically inserted here -->
+            </div>
+            <button class="btn btn-primary ml-3" onclick="nextAvatar()">&#9654;</button>
+        </div>
+        <button class="btn btn-success mt-3" onclick="startAdventure()" id="start-adventure-button">Başla! Yapay Zekayı Oyunlaştır!</button>
+    </div>
+    <header id="main-header" class="header-3d text-light text-center py-3 d-none">
+        <h1 id="main-title"><i class="fas fa-brain"></i> Yapay Zeka Oyunlaştırma Platformu</h1>
+        <h1 class="subtitle" id="subtitle">AI Gamification Platform</h1>
+        <div id="user-stats" class="mt-3">
+            <i class="fas fa-star text-warning"></i> <span id="user-points">0</span> Puan |
+            <i class="fas fa-medal text-primary"></i> <span id="user-badges">0</span> Rozet
+        </div>
+        <div class="progress mt-3">
+            <div id="progress-bar" class="progress-bar progress-bar-striped progress-bar-animated" style="width: 0%;"></div>
+        </div>
+    </header>
+    <main id="main-content" class="container mt-4 d-none">
+        <div class="row">
+            <!-- Oyun Kartları -->
+            <div class="col-md-6 mb-4">
+                <div class="card bg-dark text-light animate__animated animate__zoomIn">
+                    <div class="card-body text-center">
+                        <div class="icon mb-4"><i class="fas fa-sort-numeric-up fa-3x text-primary"></i></div>
+                        <h2 class="card-title" id="game1-title">En Büyük Sayıyı Bulma Oyunu</h2>
+                        <p id="game1-description">Bu oyunda rastgele verilen sayılar arasından en büyüğünü bulmaya çalışacaksınız.</p>
+                        <button class="btn btn-primary btn-block" onclick="playNumberGame()">Oyna</button>
+                        <p id="numberGameResult" class="mt-3"></p>
+                        <pre><code class="language-python">numbers = [3, 5, 7, 2, 8]
+max_number = max(numbers)
+print(f"En büyük sayı: {max_number}")</code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card bg-dark text-light animate__animated animate__zoomIn">
+                    <div class="card-body text-center">
+                        <div class="icon mb-4"><i class="fas fa-search fa-3x text-success"></i></div>
+                        <h2 class="card-title" id="game2-title">Sayı Tahmin Oyunu</h2>
+                        <p id="game2-description">1 ile 100 arasında bir sayı tahmin edin ve yapay zekanın doğru tahmini yapmasını sağlayın.</p>
+                        <input type="number" id="guessInput" class="form-control mb-3" placeholder="1 ile 100 arasında tahmin et"/>
+                        <button class="btn btn-primary btn-block" onclick="playGuessGame()">Oyna</button>
+                        <p id="guessGameResult" class="mt-3"></p>
+                        <pre><code class="language-python">import random
+
+def sayi_tahmin_oyunu():
+    gizli_sayi = random.randint(1, 100)
+    tahmin = None
+
+    print("1 ile 100 arasında bir sayı tahmin et!")
+
+    while tahmin != gizli_sayi:
+        tahmin = int(input("Tahminin nedir? "))
+       
+        if tahmin < gizli_sayi:
+            print("Daha büyük bir sayı tahmin et.")
+        elif tahmin > gizli_sayi:
+            print("Daha küçük bir sayı tahmin et.")
+        else:
+            print("Tebrikler, doğru tahmin ettin!")
+
+sayi_tahmin_oyunu()</code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card bg-dark text-light animate__animated animate__zoomIn">
+                    <div class="card-body text-center">
+                        <div class="icon mb-4"><i class="fas fa-film fa-3x text-warning"></i></div>
+                        <h2 class="card-title" id="game3-title">Çizgi Film Karakteri Tahmini Oyunu</h2>
+                        <p id="game3-description">Bir çizgi film karakteri tahmin edin ve yapay zekanın doğru tahmini yapmasını sağlayın.</p>
+                        <input type="text" id="characterInput" class="form-control mb-3" placeholder="Bir karakter tahmin et"/>
+                        <button class="btn btn-primary btn-block" onclick="playCharacterGame()">Oyna</button>
+                        <p id="characterGameResult" class="mt-3"></p>
+                        <pre><code class="language-python">import random
+characters = ["Mickey Mouse", "SpongeBob", "Tom", "Jerry", "Bugs Bunny"]
+selected_character = random.choice(characters)
+guess = None
+while guess != selected_character:
+    guess = input("Bir çizgi film karakteri tahmin et:")
+    if guess != selected_character:
+        print("Yanlış tahmin, tekrar dene. İpucu: Karakterimiz çizgi filmlerden tanıdık.")
+print("Tebrikler, doğru tahmin ettin!")</code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card bg-dark text-light animate__animated animate__zoomIn">
+                    <div class="card-body text-center">
+                        <div class="icon mb-4"><i class="fas fa-book fa-3x text-info"></i></div>
+                        <h2 class="card-title" id="game4-title">Rastgele Hikaye Oluşturma</h2>
+                        <p id="game4-description">Rastgele karakterler ve olaylarla bir hikaye oluşturun.</p>
+                        <button class="btn btn-primary btn-block" onclick="playStoryGame()">Oyna</button>
+                        <p id="storyGameResult" class="mt-3"></p>
+                        <pre><code class="language-python">import random
+names = ["Ali", "Ayşe", "Mehmet", "Elif"]
+places = ["parkta", "okulda", "evde", "bahçede"]
+actions = ["koşuyor", "zıplıyor", "yemek yiyor", "kitap okuyor"]
+name = random.choice(names)
+place = random.choice(places)
+action = random.choice(actions)
+print(f"{name} {place} {action}.")</code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card bg-dark text-light animate__animated animate__zoomIn">
+                    <div class="card-body text-center">
+                        <div class="icon mb-4"><i class="fas fa-key fa-3x text-danger"></i></div>
+                        <h2 class="card-title" id="game5-title">Şifre Oluşturucu</h2>
+                        <p id="game5-description">Güçlü bir şifre oluşturun ve güvenliğinizi artırın.</p>
+                        <button class="btn btn-primary btn-block" onclick="generatePassword()">Oyna</button>
+                        <p id="passwordResult" class="mt-3"></p>
+                        <pre><code class="language-python">import random
+import string
+password_length = 12
+characters = string.ascii_letters + string.digits + "!@#$%^&*()_+"
+password = ''.join(random.choice(characters) for _ in range(password_length))
+print(f"Oluşturulan şifre: {password}")</code></pre>
+                    </div>
+                </div>
+            </div>
+            <!-- Yeni Oyunlar -->
+            <div class="col-md-6 mb-4">
+                <div class="card bg-dark text-light animate__animated animate__zoomIn">
+                    <div class="card-body text-center">
+                        <div class="icon mb-4"><i class="fas fa-sort fa-3x text-blue"></i></div>
+                        <h2 class="card-title" id="game6-title">Bubble Sort Görselleştirme Oyunu</h2>
+                        <p id="game6-description">Bu oyunda, bir dizi sayının bubble sort algoritması ile sıralanmasını izleyin. Bubble sort, en basit sıralama algoritmalarından biridir ve her adımda komşu elemanları karşılaştırarak sıralama yapar.</p>
+                        <button class="btn btn-primary btn-block" onclick="playBubbleSortGame()">Oyna</button>
+                        <p id="bubbleSortGameResult" class="mt-3"></p>
+                        <pre><code class="language-python">def bubble_sort(arr):
+    n = len(arr)
+    for i in range(n):
+        for j in range(0, n-i-1):
+            if arr[j] > arr[j+1]):
+                arr[j], arr[j+1] = arr[j+1], arr[j]
+    return arr
+
+arr = [64, 34, 25, 12, 22, 11, 90]
+sorted_arr = bubble_sort(arr)
+print(f"Sıralı dizi: {sorted_arr}")</code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card bg-dark text-light animate__animated animate__zoomIn">
+                    <div class="card-body text-center">
+                        <div class="icon mb-4"><i class="fas fa-calculator fa-3x text-green"></i></div>
+                        <h2 class="card-title" id="game7-title">Dik Üçgen Hipotenüs Hesaplama Oyunu</h2>
+                        <p id="game7-description">Bu oyunda, bir dik üçgenin iki kenarını girerek hipotenüsü hesaplayın. Dik üçgenin hipotenüsü, diğer iki kenarın karelerinin toplamının kareköküne eşittir.</p>
+                        <input type="number" id="sideA" class="form-control mb-3" placeholder="Birinci kenar"/>
+                        <input type="number" id="sideB" class="form-control mb-3" placeholder="İkinci kenar"/>
+                        <button class="btn btn-primary btn-block" onclick="calculateHypotenuse()">Oyna</button>
+                        <p id="hypotenuseResult" class="mt-3"></p>
+                        <pre><code class="language-python">import math
+
+def hipotenus_hesapla(a, b):
+    return math.sqrt(a**2 + b**2)
+
+a = 3
+b = 4
+hipotenus = hipotenus_hesapla(a, b)
+print(f"Hipotenüs: {hipotenus}")</code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card bg-dark text-light animate__animated animate__zoomIn">
+                    <div class="card-body text-center">
+                        <div class="icon mb-4"><i class="fas fa-brain fa-3x text-purple"></i></div>
+                        <h2 class="card-title" id="game8-title">Doğal Dil İşleme - Metin Sınıflandırma Oyunu</h2>
+                        <p id="game8-description">Bu oyunda, kısa bir metin girin ve metnin pozitif veya negatif olduğunu sınıflandırın. Doğal dil işleme (NLP) algoritmaları kullanılarak metnin duygu analizi yapılır.</p>
+                        <input type="text" id="textInput" class="form-control mb-3" placeholder="Metin girin"/>
+                        <button class="btn btn-primary btn-block" onclick="classifyText()">Oyna</button>
+                        <div id="animation" class="d-none">
+                            <p class="animate__animated animate__fadeIn">Metin Analizi Yapılıyor...</p>
+                            <p class="animate__animated animate__fadeIn animate__delay-1s">Duygu Puanı Hesaplanıyor...</p>
+                            <p class="animate__animated animate__fadeIn animate__delay-2s">Sonuç Bulunuyor...</p>
+                        </div>
+                        <p id="textClassificationResult" class="mt-3"></p>
+                        <pre><code class="language-python">from textblob import TextBlob
+
+def metin_siniflandirma(metin):
+    analiz = TextBlob(metin)
+    if analiz.sentiment.polarity > 0:
+        return "Pozitif"
+    elif analiz.sentiment.polarity < 0:
+        return "Negatif"
+    else:
+        return "Nötr"
+
+metin = "Bu oyun harika!"
+sonuc = metin_siniflandirma(metin)
+print(f"Metin sınıflandırması: {sonuc}")</code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card bg-dark text-light animate__animated animate__zoomIn">
+                    <div class="card-body text-center">
+                        <div class="icon mb-4"><i class="fas fa-cogs fa-3x text-teal"></i></div>
+                        <h2 class="card-title" id="game9-title">Mantık Kapıları Simülasyonu</h2>
+                        <p id="game9-description">Bu oyunda, temel mantık kapılarını (AND, OR, NOT) kullanarak bir mantık devresi tasarlayın ve sonuçlarını izleyin. Mantık kapıları, dijital devrelerin temel bileşenleridir ve iki veya daha fazla giriş sinyalini belirli kurallara göre işler.</p>
+                        <input type="text" id="logicInputA" class="form-control mb-3" placeholder="A değeri (1 veya 0)"/>
+                        <input type="text" id="logicInputB" class="form-control mb-3" placeholder="B değeri (1 veya 0)"/>
+                        <button class="btn btn-primary btn-block" onclick="simulateLogicGates()">Oyna</button>
+                        <p id="logicGateResult" class="mt-3"></p>
+                        <pre><code class="language-python">def and_gate(a, b):
+    return a & b
+
+def or_gate(a, b):
+    return a | b
+
+def not_gate(a):
+    return ~a & 1
+
+a = 1
+b = 0
+and_result = and_gate(a, b)
+or_result = or_gate(a, b)
+not_result = not_gate(a)
+print(f"AND: ${and_result}, OR: ${or_result}, NOT: ${not_result}")</code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card bg-dark text-light animate__animated animate__zoomIn">
+                    <div class="card-body text-center">
+                        <div class="icon mb-4"><i class="fas fa-chart-line fa-3x text-orange"></i></div>
+                        <h2 class="card-title" id="game10-title">Veri Kümesi Sınıflandırma Oyunu</h2>
+                        <p id="game10-description">Bu oyunda, veri kümesindeki örnekleri sınıflandırmak için k-en yakın komşu algoritmasını (k-NN) kullanın. k-NN algoritması, her veri noktasını en yakın komşularına göre sınıflandırır.</p>
+                        <button class="btn btn-primary btn-block" onclick="playClassificationGame()">Oyna</button>
+                        <div id="classificationAnimation" class="d-none">
+                            <p class="animate__animated animate__fadeIn">Veri Kümesi Yükleniyor...</p>
+                            <p class="animate__animated animate__fadeIn animate__delay-1s">Model Eğitiliyor...</p>
+                            <p class="animate__animated animate__fadeIn animate__delay-2s">Sonuç Hesaplanıyor...</p>
+                        </div>
+                        <p id="classificationGameResult" class="mt-3"></p>
+                        <pre><code class="language-python">from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score
+
+def veri_kumesi_siniflandirma():
+    iris = load_iris()
+    X_train, X_test, y_train, y_test = train_test_split(iris.data, iris.target, test_size=0.2)
+    knn = KNeighborsClassifier(n_neighbors=3)
+    knn.fit(X_train, y_train)
+    y_pred = knn.predict(X_test)
+    dogruluk = accuracy_score(y_test, y_pred)
+    print(f"Sınıflandırma doğruluğu: {dogruluk}")
+
+veri_kumesi_siniflandirma()</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h3 class="mt-5" id="badges-title">Rozetler</h3>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card bg-dark text-light animate__animated animate__zoomIn badge-card">
+                    <div class="card-body text-center">
+                        <div class="icon mb-4"><i class="fas fa-chess-board fa-3x text-white"></i></div>
+                        <h2 class="card-title">Siyah Beyaz Rozeti</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card bg-dark text-light animate__animated animate__zoomIn badge-card">
+                    <div class="card-body text-center">
+                        <div class="icon mb-4"><i class="fas fa-trophy fa-3x text-gold"></i></div>
+                        <h2 class="card-title">Şampiyon Rozeti</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card bg-dark text-light animate__animated animate__zoomIn badge-card">
+                    <div class="card-body text-center">
+                        <div class="icon mb-4"><i class="fas fa-dove fa-3x text-white"></i></div>
+                        <h2 class="card-title">Beşiktaş Rozeti</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="bg-custom text-white text-center p-3">
+        <p>&copy; 2024 Ayhan Bozkurt</p>
+    </footer>
+    <div id="notification" class="notification"></div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/skulpt/dist/skulpt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/skulpt/dist/skulpt-stdlib.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
