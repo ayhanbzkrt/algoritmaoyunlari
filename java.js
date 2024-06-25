@@ -1,4 +1,4 @@
-﻿var avatars = [
+var avatars = [
     { name: "Neuralis the Navigator", description: "Yapay zeka sinir ağlarından ilham alan bir keşif uzmanı.", icon: "🤖" },
     { name: "Quantara the Quantum Sorcerer", description: "Kuantum hesaplamadan ilham almış bir büyücü.", icon: "🔮" },
     { name: "Circuita the Cyber Warrior", description: "Siber dünyadan gelen bir savaşçı.", icon: "⚔️" },
@@ -368,6 +368,25 @@ function highlightPythonCode(id) {
 window.onload = function () {
     showAvatars();
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
