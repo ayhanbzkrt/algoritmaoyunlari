@@ -1,0 +1,277 @@
+﻿body {
+    font-family: Arial, sans-serif;
+    background-color: #0d0d0d;
+    color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s ease;
+}
+
+header, footer {
+    background-color: #1a1a1a;
+    padding: 20px 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+header h1, footer p {
+    margin: 0;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    color: #ff4081;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+.header-3d {
+    background-color: #333;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    transform: translateZ(0);
+    perspective: 1000px;
+}
+
+.header-3d h1 {
+    display: inline-block;
+}
+
+.header-3d .subtitle {
+    font-size: 1rem;
+    color: #ccc;
+    display: block;
+    margin-top: 10px;
+}
+
+#user-stats {
+    font-size: 1.2rem;
+    margin-top: 15px;
+}
+
+#user-stats i {
+    margin-right: 5px;
+}
+
+.progress {
+    height: 20px;
+    border-radius: 10px;
+    background-color: #333;
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.progress-bar {
+    background-color: #03DAC6;
+    border-radius: 10px;
+}
+
+.navbar {
+    margin-bottom: 20px;
+}
+
+.nav-link i {
+    margin-right: 5px;
+}
+
+.card {
+    border: none;
+    border-radius: 15px;
+    background: linear-gradient(145deg, #1f1f1f, #252525);
+    box-shadow: 10px 10px 20px #0a0a0a, -10px -10px 20px #323232;
+    overflow: hidden;
+    margin-bottom: 20px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 15px 15px 30px #0a0a0a, -15px -15px 30px #323232;
+}
+
+.card-body {
+    text-align: center;
+    padding: 30px;
+}
+
+.card-body .icon {
+    margin-bottom: 20px;
+}
+
+.card-body h2 {
+    font-size: 1.5rem;
+    color: #03DAC6;
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    background-color: #03DAC6;
+    color: #0d0d0d;
+    border: none;
+    border-radius: 25px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+button:hover {
+    background-color: #029a8e;
+    transform: translateY(-5px);
+}
+
+pre {
+    background: #1e1e1e;
+    padding: 20px;
+    border-radius: 15px;
+    overflow-x: auto;
+    color: #ffffff;
+    margin-top: 20px;
+    box-shadow: inset 5px 5px 10px #0a0a0a, inset -5px -5px 10px #323232;
+}
+
+.highlight {
+    background-color: rgba(255, 255, 0, 0.2);
+    transition: background-color 1s ease;
+}
+
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #03DAC6;
+    color: #0d0d0d;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    display: none;
+    z-index: 1000;
+}
+
+.badge-card {
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.badge-card:hover {
+    transform: scale(1.05);
+    box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.5), -15px -15px 30px rgba(255, 255, 255, 0.2);
+}
+
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+
+    button {
+        font-size: 1rem;
+        padding: 8px 16px;
+    }
+
+    .card-body h2 {
+        font-size: 1.2rem;
+    }
+}
+
+#avatar-selection {
+    text-align: center;
+}
+
+#avatar-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.avatar {
+    margin: 10px;
+    padding: 20px;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    transition: transform 0.3s, border-color 0.3s;
+    cursor: pointer;
+    background: linear-gradient(145deg, #232323, #1a1a1a);
+    box-shadow: 5px 5px 10px #141414, -5px -5px 10px #282828;
+}
+
+.avatar img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto;
+}
+
+.avatar-info {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #ffffff; 
+}
+
+.avatar.selected {
+    border-color: #00ff00;
+    transform: scale(1.1);
+    animation: magicAnimation 1s ease-in-out infinite;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+@keyframes magicAnimation {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.rainbow-text {
+    background-image: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+    background-clip: text;
+    color: transparent;
+    font-size: 2em;
+    animation: rainbow-animation 3s linear infinite;
+}
+
+@keyframes rainbow-animation {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
